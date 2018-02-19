@@ -1,10 +1,10 @@
-const express = require('express');
+var express = require('express');
 
-const app = express();
+var app = express();
 
-// const request = require('request');
+// var request = require('request');
 
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 
 
 app.use(bodyParser.urlencoded({
@@ -14,11 +14,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-app.post('/', (req, res) => {
+app.post('/', function(req, res) {
   console.log(req);
-  const action = req.body.result.action; // action info
+  var action = req.body.result.action; // action info
 
-  // const issue = '';
+  // var issue = '';
 
   if (action === 'info') {
     console.log(req.body);
@@ -26,6 +26,6 @@ app.post('/', (req, res) => {
   res.status(200);
 });
 
-app.listen((process.env.PORT || 8000), () => {
+app.listen((process.env.PORT || 8000), function() {
   console.log('Server up and listening');
 });

@@ -1,17 +1,20 @@
 {
-    "name": "df-twi-bot",
-    "version": "1.0.0",
-    "description": "Dialog Flow Twitter Bot Poc",
-    "main": "index.js",
-    "scripts": {
-      "start": "node index.js",
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Ashutosh Sharma",
-    "dependencies": {
-      "body-parser": "^1.15.0",
-      "express": "^4.13.4",
-      "request": "^2.72.0"
-    }
-    
+  "name": "df-twi-bot",
+  "version": "1.0.0",
+  "description": "Dialog Flow Twitter Bot Poc",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ashutosh Sharma",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "dotenv": "^5.0.0",
+    "express": "^4.13.4",
+    "oauth": "^0.9.15",
+    "querystring": "^0.2.0",
+    "request": "^2.72.0",
+    "twit": "^2.2.9"
   }
+}

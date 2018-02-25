@@ -82,7 +82,7 @@ app.post('/createWelcomeMessageRule', function (req, res) {
 
 app.post('/interact', function (req, res) {
   console.log(req);
-  var action = req.body.result.action; // action info
+  var action = req.body.queryResult.action; // action info
 
   // var issue = '';
 

@@ -79,17 +79,54 @@ app.post('/createWelcomeMessageRule', function (req, res) {
   }   
 });
 
+var infoObj = {
+  malaria: {
+    info: "A disease caused by a plasmodium parasite, transmitted by the bite of infected mosquitoes.",
+    symptoms: "Symptoms are chills, fever, and sweating, usually occurring a few weeks after being bitten.",
+    treatment: "Treatment includes antimalarial drugs like Anti-parasite and Antibiotics."
+  },
+  diabetes: {
+    info: "A group of diseases that result in too much sugar in the blood (high blood glucose). Type 1 diabetes - A chronic condition in which the pancreas produces little or no insulin. Type 2 diabetes - A chronic condition that affects the way the body processes blood sugar (glucose).",
+    symptoms: "Often, there are no symptoms. When symptoms do occur, they include excessive thirst or urination, fatigue, weight loss, or blurred vision.",
+    treatment: "Controlling blood sugar through diet, oral medications, or insulin is the main treatment. Regular screening for complications is also required."
+  },
+  typhoid: {
+    info: "A bacterial disease spread through contaminated food and water or close contact.",
+    symptoms: "Symptoms include high fever, headache, belly pain, and either constipation or diarrhea.",
+    treatment: "Treatment includes antibiotics and fluids."
+  },
+  jaundice: {
+    info: "A liver condition that causes yellowing of a newborn baby's skin and eyes. Neonatal jaundice is common in preterm babies. The cause is often an immature liver. Infection, medications, or blood disorders may cause more serious cases.",
+    symptoms: "Symptoms include yellowing of the skin and the whites of the eyes that appears within days after birth.",
+    treatment: "In most cases, treatment isn't needed. Light therapy (phototherapy) can help resolve moderate or severe cases."
+  },
+  chicken_pox: {
+    info: "A highly contagious viral infection causing an itchy, blister-like rash on the skin. Chickenpox is highly contagious to those who haven't had the disease or been vaccinated against it.",
+    symptoms: "Skin: blister, scab, ulcers, or red spots. Whole body: fatigue, fever, or loss of appetite. Also common: headache, itching, sore throat, or swollen lymph nodes",
+    treatment: "Chickenpox can be prevented by a vaccine. Usually self-treatable, although high-risk groups may receive antiviral medications."
+  }
+};
+
 
 app.post('/interact', function (req, res) {
-  console.log(req);
+  var response;
   var action = req.body.queryResult.action; // action info
-
-  // var issue = '';
 
   if (action === 'info') {
     console.log(req.body);
+    var parameters = req.body.queryResult.parameters;
+
+    infoObj.forEach(function(disease) {
+      if(disease === parameters.disease) {
+        var info = parameters.information;
+        response = infoObj.info;
+        // Return the results of the weather API to API.AI
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(JSON.stringify({ 'speech': response, 'displayText': response,'source':'df-twi-bot' }));
+      }
+    });
   }
-  res.status(200);
+  res.status(200);  
 });
 
 app.listen((process.env.PORT || 8000), function () {

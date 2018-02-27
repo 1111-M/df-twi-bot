@@ -116,7 +116,7 @@ app.post('/interact', function (req, res) {
     console.log(req.body);
     var parameters = req.body.queryResult.parameters;
 
-    infoObj.forEach(function(disease) {
+    for (var disease in infoObj) {
       if(disease === parameters.disease) {
         var info = parameters.information;
         response = infoObj.info;
@@ -124,7 +124,7 @@ app.post('/interact', function (req, res) {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(JSON.stringify({ 'speech': response, 'displayText': response,'source':'df-twi-bot' }));
       }
-    });
+    };
   }
   res.status(200);  
 });

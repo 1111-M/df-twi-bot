@@ -123,7 +123,7 @@ app.post('/interact', function (req, res) {
         console.log(response);
         // Return the results to API.AI
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json({ 'speech': response, 'displayText': response, 'source': 'df-twi-bot' });
+        res.status(200).json({ 'fulfillmentText': response, 'source': 'df-twi-bot' });
         break;
       }
     };

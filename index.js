@@ -145,6 +145,11 @@ app.post('/interact', function (req, res) {
         break;
       }
     };
+    if(response === undefined) {
+      response = "Oh! that's embarrassing. That didnt work. Please try something else"
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json({ 'fulfillmentText': response, 'source': 'df-twi-bot' });
+    }
   }
   res.status(200);  
 });

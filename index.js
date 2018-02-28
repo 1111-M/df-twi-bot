@@ -119,10 +119,11 @@ app.post('/interact', function (req, res) {
     for (var disease in infoObj) {
       if(disease === parameters.disease) {
         var info = parameters.information;
-        response = infoObj.info;
+        response = infoObj[disease].info;
         // Return the results of the weather API to API.AI
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(JSON.stringify({ 'speech': response, 'displayText': response,'source':'df-twi-bot' }));
+        break;
       }
     };
   }

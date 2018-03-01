@@ -138,7 +138,7 @@ app.post('/interact', function (req, res) {
         var infoRequested = parameters.info_type;
         response = infoObj[disease][infoRequested];
         console.log(response);
-        var askNext = '\nWhat else would you like you know?';
+        var askNext = '\n\nWhat else would you like you know?';
         // Return the results to API.AI
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json({ 'fulfillmentText': response + askNext, 'source': 'df-twi-bot' });
@@ -146,7 +146,7 @@ app.post('/interact', function (req, res) {
       }
     };
     if(response === undefined) {
-      response = "Oh! that's embarrassing. That didnt work. Please try something else"
+      response = "Oh! that's embarrassing for me. That didnt work. Please try something else"
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json({ 'fulfillmentText': response, 'source': 'df-twi-bot' });
     }

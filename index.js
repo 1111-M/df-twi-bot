@@ -138,7 +138,7 @@ app.post('/interact', function (req, res) {
         var infoRequested = parameters.info_type;
         response = infoObj[disease][infoRequested];
         console.log(response);
-        var askNext = '\n\nWhat else would you like you know?';
+        var askNext = '\n\nWhat else would you like to know?';
         // Return the results to API.AI
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json({ 'fulfillmentText': response + askNext, 'source': 'df-twi-bot' });

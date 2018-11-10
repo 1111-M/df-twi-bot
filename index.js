@@ -25,6 +25,60 @@ var twitObj = new Twit({
   access_token_secret: process.env.ACCESS_TOKEN_SECRET
 });
 
+app.post('/createDefaultWelcomeMsg', function (req, res) {
+  var qs = {
+    name: req.body.name,
+    welcome_message: {
+      message_data: {
+        text: req.body.message
+      }
+    }
+  };
+
+  twitObj.post('direct_messages/welcome_messages/new', qs, function(err, data, response) {
+    if(err) {
+      console.log(err);
+      res.status(500);
+    } else {
+      console.log(data);
+      res.status(200).json(data);
+    }    
+  });  
+});
+
+app.post('/createWelcomeMessageRule', function (req, res) {
+  var overwriteEnvMsgId = req.body.should_overwrite;
+  var qs;
+  if(overwriteEnvMsgId === true) {
+    if(req.body.welcome_msg_id === undefined || req.body.welcome_msg_id === null  || req.body.welcome_msg_id === '') {
+      res.status(400).json({ error_msg: 'Please provide message ID if overwrite is true'});
+    } else {
+      qs = {
+        welcome_message_rule: {
+          welcome_message_id: req.body.welcome_msg_id
+        }
+      };
+    }
+  } else {
+    qs = {
+      welcome_message_rule: {
+        welcome_message_id: process.env.TWITTER_DEFAULT_WELCOME_MSG_ID  
+      }
+    };
+  }
+
+  if(qs !== undefined) {
+    twitObj.post('direct_messages/welcome_messages/rules/new', qs, function(err, data, response) {
+      if(err) {
+        console.log(err);
+        res.status(500);
+      } else {
+        console.log(data);
+        res.status(200).json(data);
+      }    
+    });
+  }   
+});
 
 var infoObj = {
   malaria: {
